@@ -1,10 +1,11 @@
 ﻿using InventoryApp.Core.Entities;
 using InventoryApp.UseCases.Interfaces;
+using InventoryApp.UseCases.Inventories.Interfaces;
 using System.Threading.Tasks;
 
 namespace InventoryApp.UseCases.Inventories
 {
-    public class ViewInventoryByNameUsecase
+    public class ViewInventoryByNameUsecase : IViewInventoryByNameUsecase
     {
         private readonly IInventoryRepository _inventoryRepo;
         public ViewInventoryByNameUsecase(IInventoryRepository inventoryRepo)
