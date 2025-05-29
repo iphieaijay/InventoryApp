@@ -1,15 +1,26 @@
+using InventoryApp.Plugin.Data;
 using InventoryApp.Plugin.Repositories;
 using InventoryApp.UseCases.Interfaces;
 using InventoryApp.UseCases.Inventories;
 using InventoryApp.UseCases.Inventories.Interfaces;
 using InventoryApp.Web.Components;
+using InventoryApp.Web.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddRazorComponents();
 builder.Services.AddSingleton<IInventoryRepository, InventoyRepository>();
 builder.Services.AddTransient<IViewInventoryByNameUsecase, ViewInventoryByNameUsecase>();
+builder.Services.AddDbContext<InventoryDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("InventoryDbConfig"));
+});
+builder.Services.AddApplicationServices(builder.Configuration);
+
+
 
 var app = builder.Build();
 
