@@ -1,0 +1,53 @@
+﻿@page "/inventoryList"
+@attribute [StreamRendering]
+
+@inject IViewInventoryByNameUsecase ViewInventoryByNameUsecase
+
+<PageTitle>::InventoryList::</PageTitle>
+
+<h1>Inventory List</h1>
+@if (inventories is not null && inventories.Any())
+{
+    <div class="container">
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var inv in inventories)
+                {
+                    <tr>
+                        <td>@inv.Name</td>
+                        <td>@inv.Quantity</td>
+                        <td>@inv.Price.ToString("c")</td>
+                        <td>
+                            <button type="button" class="btn btn-success">Edit</button>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>No inventories found.</p>
+}
+
+
+@code {
+    private List<Inventory>? inventories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        inventories = (await ViewInventoryByNameUsecase.ExecuteAsync()).ToList();
+    }
+}
