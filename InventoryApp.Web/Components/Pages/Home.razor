@@ -1,7 +1,48 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+@inject IViewInventoryByNameUsecase ViewInventoryByNameUsecase
+<PageTitle>Test Page</PageTitle>
 
-<h1>Hello, world!</h1>
+<br/>
+<br/>
+@if(inventories is not null && inventories.Any())
+{
+    <div class="container">
+        <h1>Inventories</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
 
-Welcome to your new app.
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var inv in inventories)
+                {
+                    <tr>
+                        <td>@inv.Name</td>
+                        <td>@inv.Quantity</td>
+                        <td>@inv.Price</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>No inventories found.</p>
+}
+
+
+@code{
+    private List<Inventory>? inventories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        inventories=(await ViewInventoryByNameUsecase.ExecuteAsync()).ToList();
+    }
+}
