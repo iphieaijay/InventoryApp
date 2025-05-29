@@ -1,9 +1,12 @@
+using InventoryApp.Plugin.Repositories;
+using InventoryApp.UseCases.Interfaces;
 using InventoryApp.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents();
+builder.Services.AddSingleton<IInventoryRepository, InventoyRepository>();
 
 var app = builder.Build();
 

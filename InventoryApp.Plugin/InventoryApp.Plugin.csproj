@@ -1,14 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>268381f7-6b95-4264-82bd-e88803805599</UserSecretsId>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\InventoryApp.Plugin\InventoryApp.Plugin.csproj" />
     <ProjectReference Include="..\InventoryApp.UseCases\InventoryApp.UseCases.csproj" />
   </ItemGroup>
 
